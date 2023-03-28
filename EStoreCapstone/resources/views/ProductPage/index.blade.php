@@ -50,11 +50,11 @@ Laravel Project
 					@foreach ($items as $item)
 						<tr>
 							<th>{{ $item->id }}</th>
-							<td><a href="{{ route('items.show', $item->id) }}"><img
+							<td><a href="{{ route('items.order', $item->id) }}"><img
                                 @if ($item->picture != "")
                                 <p style='margin-top:20px'><br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:100px;' ></p>
                                 @endif
-							<td><a href="{{ route('items.show', $item->id) }}">{{ $item->title }}</a></td>
+							<td><a href="{{ route('items.order', $item->id) }}">{{ $item->title }}</a></td>
 							<td>{{ $item->price }}</td>
 
 							<td><a href="{{ route('items.order', $item->id) }}" class="btn btn-success btn-xs">Buy

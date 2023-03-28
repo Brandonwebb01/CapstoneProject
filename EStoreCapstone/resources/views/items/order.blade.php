@@ -12,7 +12,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="thumbnail">
-                <img src="{{ asset('images/' . $item->image) }}" alt="{{ $item->title }}">
+                @if ($item->picture != "")
+                <p style='margin-top:20px'><br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:200px;' ></p>
+                @endif
                 <div class="caption">
                     <h3>{{ $item->title }}</h3>
                     <p>{{ $item->description }}</p>

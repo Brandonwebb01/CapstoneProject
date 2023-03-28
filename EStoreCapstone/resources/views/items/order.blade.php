@@ -12,9 +12,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="thumbnail">
-                @if ($item->picture != "")
-                <p style='margin-top:20px'><br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:200px;' ></p>
-                @endif
+                <td><img src="{{ asset('storage/images/items/lrg' . $item->picture) }}" alt="{{ $item->title }}" class="img-fluid"></td>
+                <td>{{ $item->title }}</td>
                 <div class="caption">
                     <h3>{{ $item->title }}</h3>
                     <p>{{ $item->description }}</p>

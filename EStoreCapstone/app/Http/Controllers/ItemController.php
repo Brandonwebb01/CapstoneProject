@@ -42,46 +42,65 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
-        //dd(storage_path());;
-        //validate the data
-        // if fails, defaults to create() passing errors
-        $this->validate($request, ['title'=>'required|string|max:255',
-                                   'category_id'=>'required|integer|min:0',
-                                   'description'=>'required|string',
-                                   'price'=>'required|numeric',
-                                   'quantity'=>'required|integer',
-                                   'sku'=>'required|string|max:100',
-                                   'picture' => 'required|image']); 
+{ 
+    //validate the data
+    $this->validate($request, [
+        'title' => 'required|string|max:255',
+        'category_id' => 'required|integer|min:0',
+        'description' => 'required|string',
+        'price' => 'required|numeric',
+        'quantity' => 'required|integer',
+        'sku' => 'required|string|max:100',
+        'picture' => 'required|image'
+    ]); 
 
-        //send to DB (use ELOQUENT)
-        $item = new Item;
-        $item->title = $request->title;
-        $item->category_id = $request->category_id;
-        $item->description = $request->description;
-        $item->price = $request->price;
-        $item->quantity = $request->quantity;
-        $item->sku = $request->sku;
+    //create a new item instance
+    $item = new Item([
+        'title' => $request->get('title'),
+        'category_id' => $request->get('category_id'),
+        'description' => $request->get('description'),
+        'price' => $request->get('price'),
+        'quantity' => $request->get('quantity'),
+        'sku' => $request->get('sku')
+    ]);
 
-        //save image
-        if ($request->hasFile('picture')) {
-            $image = $request->file('picture');
+    //save image to storage
+    //check if file is present
+    if ($request->hasFile('picture')) {
+        //retreieves uploaded image file and assigns it to a unique filename
+        $image = $request->file('picture');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $location = 'images/items/' . $filename;
 
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location ='images/items/' . $filename;
+        //uses intervention image to create object from image
+        $image = Image::make($image);
+        
+        //creates thumbnail from image
+        $thumbnail = Image::make($image->encode());
+        $thumbnail->resize(80, 80);
+        //saves thumbnail to storage
+        $thumbnail_location = 'images/items/tn' . $filename;
 
-            $image = Image::make($image);
-            Storage::disk('public')->put($location, (string) $image->encode());
-            $item->picture = $filename;
-        }
+        //creates large image from image and sets constraints
+        $lrg_image = Image::make($image->encode());
+        $lrg_image->resize(400, 400);
+        //saves large image to storage
+        $larimg_location = 'images/items/lrg' . $filename;
 
-        $item->save(); //saves to DB
+        //saves all images to storage
+        Storage::disk('public')->put($location, (string) $image->encode());
+        Storage::disk('public')->put($thumbnail_location, (string) $thumbnail->encode());
+        Storage::disk('public')->put($larimg_location, (string) $lrg_image->encode());
 
-        Session::flash('success','The item has been added');
-
-        //redirect
-        return redirect()->route('items.index');
+        $item->picture = $filename;
     }
+
+    //save item to database
+    $item->save();
+
+    //redirect to items index page
+    return redirect()->route('items.index')->with('success', 'Item has been added');
+}
 
     /**
      * Display the specified resource.

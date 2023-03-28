@@ -13,6 +13,15 @@ class Item extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     protected $dates = ['deleted_at'];
+    protected $fillable = [
+        'title',
+        'category_id',
+        'description',
+        'price',
+        'quantity',
+        'sku',
+        'picture',
+    ];
 
     public function category() {
         return $this->hasOne('\App\Category','id', 'category_id')->orderBy('name','ASC');

@@ -11,7 +11,7 @@ Laravel Project
 @section('scripts')
 {!! Html::script('/bower_components/parsleyjs/dist/parsley.min.js') !!}
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
-    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 </script>
 
 <div id="description">This is some sample content.</div>
@@ -56,7 +56,7 @@ Laravel Project
 
 			    {{ Form::label('description', 'Description:', ['style'=>'margin-top:20px']) }}
 			    {{ Form::textarea('description', null, ['class'=>'form-control', 
-				                                 'data-parsley-required'=>'']) }}
+    				'data-parsley-required'=>'', 'filters' => 'strip_tags']) }}
 
 				{{ Form::label('price', 'Price:', ['style'=>'margin-top:20px']) }}
 			    {{ Form::text('price', null, ['class'=>'form-control', 'style'=>'', 

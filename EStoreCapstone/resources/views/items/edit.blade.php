@@ -70,7 +70,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 											  'data-parsley-required'=>'']) }}
 
 				@if ($item->picture != "")
-				    <p style='margin-top:20px'>Current Image:<br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:100px;' ></p>
+				<td><img src="{{ asset('storage/images/items/tn' . $item->picture) }}" alt="{{ $item->title }}" class="img-fluid"></td>
 			    @endif
 
 				{{ Form::label('picture', 'Picture:', ['style'=>'margin-top:20px']) }}

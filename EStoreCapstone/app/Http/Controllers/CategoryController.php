@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -109,6 +109,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->delete();
+
+        Session::flash('success','The category has been deleted');
+
+        return redirect()->route('categories.index');
+
+        return redirect()->route('items.index');
     }
 }

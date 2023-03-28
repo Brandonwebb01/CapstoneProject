@@ -39,8 +39,13 @@ Laravel Project
 							<td>{{ $category->name }}</td>
 							<td style='width:100px;'>{{ date('M j, Y', strtotime($category->created_at)) }}</td>
 							<td style='width:100px;'>{{ date('M j, Y', strtotime($category->updated_at)) }}</td>
-							<td style='width:150px;'><div style='float:left; margin-right:5px;'><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-success btn-sm">Edit</a></div><div style='float:left;'></div>
-							</td>
+							<td style='width:150px;'><div style='float:left; margin-right:5px;'><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-success btn-sm">Edit</a></div><div style='float:left;'></div></td>
+							<td style='width:150px;'><div style='float:left; margin-right:5px;'>
+							@if($category->items->count() == 0)
+								{!! Form::open(['route' => ['categories.destroy', $category->id], 'method'=>'DELETE']) !!}
+								{{ Form::submit('Delete', ['class'=>'btn btn-sm btn-danger ', 'style'=>'', 'onclick'=>'return confirm("Are you sure?")']) }}
+								{!! Form::close() !!}</div>
+                            @endif
 						</tr>
 					@endforeach
 				</tbody>

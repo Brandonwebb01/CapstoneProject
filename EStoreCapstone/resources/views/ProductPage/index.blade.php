@@ -37,33 +37,34 @@ Laravel Project
 	</div>
 
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-12">
 			<table class="table">
 				<thead>
 					<th>#</th>
+					<th>Image</th>
 					<th>Title</th>
-					<th>Created At</th>
-					<th>Last Modified</th>
-					<th></th>
+					<th>Price</th>
+					<th>Action</th>
 				</thead>
 				<tbody>
 					@foreach ($items as $item)
 						<tr>
 							<th>{{ $item->id }}</th>
-							<td>{{ $item->title }}</td>
-							<td style="width: 100px;">{{ date('M j, Y', strtotime($item->created_at)) }}</td>
-							<td>{{ date('M j, Y', strtotime($item->updated_at)) }}</td>
-							<td style="width: 175px;"><div style='float:left; margin-right:5px;'><a href="{{ route('items.edit', $item->id) }}" class="btn btn-success btn-sm">Edit</a></div><div style='float:left;'>
-								{!! Form::open(['route' => ['items.destroy', $item->id], 'method'=>'DELETE']) !!}
-							    	{{ Form::submit('Delete', ['class'=>'btn btn-sm btn-danger btn-block', 'style'=>'', 'onclick'=>'return confirm("Are you sure?")']) }}
-								{!! Form::close() !!}</div>
-							</td>
+							<td><a href="{{ route('items.show', $item->id) }}"><img
+                                @if ($item->picture != "")
+                                <p style='margin-top:20px'><br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:100px;' ></p>
+                                @endif
+							<td><a href="{{ route('items.show', $item->id) }}">{{ $item->title }}</a></td>
+							<td>{{ $item->price }}</td>
+
+							<td><a href="{{ route('items.order', $item->id) }}" class="btn btn-success btn-xs">Buy
+									Now</a></td>
 						</tr>
 					@endforeach
 				</tbody>
 			</table>
 			<div class="text-center">
-				{!! $items->links(); !!}
+				{!! $items->links() !!}
 			</div>
 		</div>
 	</div>

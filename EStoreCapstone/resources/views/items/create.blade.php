@@ -10,6 +10,21 @@ Laravel Project
 
 @section('scripts')
 {!! Html::script('/bower_components/parsleyjs/dist/parsley.min.js') !!}
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js">
+    import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+</script>
+
+<div id="description">This is some sample content.</div>
+	<script>
+		ClassicEditor
+			.create( document.querySelector( '#description' ) )
+			.then( editor => {
+					console.log( editor );
+			} )
+			.catch( error => {
+					console.error( error );
+			} );
+	</script>
 @endsection
 
 @section('css')

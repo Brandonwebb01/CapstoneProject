@@ -18,8 +18,10 @@ class ItemController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $items = Item::orderBy('title','ASC')->paginate(10);
-        return view('items.index')->with('items', $items);
+       return view('items.index', ['categories' => $categories], ['items' => $items]);
+
     }
 
     /**
@@ -179,5 +181,11 @@ class ItemController extends Controller
 
         return redirect()->route('items.index');
 
+    }
+
+    public function order($id)
+    {
+        $item = Item::find($id);
+        return view('items.order', compact('item'));
     }
 }

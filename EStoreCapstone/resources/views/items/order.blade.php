@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+// If there is no session ID, create one and store it in the session variable
+if (empty($_SESSION['sessionID'])) {
+    $session_id = session_id();
+    $_SESSION['sessionID'] = $session_id;
+}
+
+// If there is no IP address stored in the session variable, get it from the user and store it
+if (empty($_SESSION['ipAddress'])) {
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $_SESSION['ipAddress'] = $ip_address;
+}
+?>
 @extends('common')
 
 @section('pagetitle')
@@ -16,7 +31,7 @@
                 <td>{{ $item->title }}</td>
                 <div class="caption">
                     <h3>{{ $item->title }}</h3>
-                    <p>{{ $item->description }}</p>
+                    <p>{{strip_tags($item->description)}}</p>
                     <p><strong>Price: </strong>{{ $item->price }}</p>
                 </div>
             </div>
@@ -31,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <input type="text" name="description" id="description" class="form-control" value="{{ $item->description }}" disabled>
+                    <input type="text" name="description" id="description" class="form-control" value="{{strip_tags($item->description)}}" disabled>
                 </div>
                 <div class="form-group">
                     <label for="price">Price:</label>

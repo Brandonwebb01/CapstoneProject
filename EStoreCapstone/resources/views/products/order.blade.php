@@ -12,6 +12,8 @@ if (empty($_SESSION['ipAddress'])) {
     $ip_address = $_SERVER['REMOTE_ADDR'];
     $_SESSION['ipAddress'] = $ip_address;
 }
+
+$quantity = 1;
 ?>
 @extends('common')
 
@@ -38,7 +40,7 @@ if (empty($_SESSION['ipAddress'])) {
         </div>
         <div class="col-md-6">
             <h1>Order Now</h1>
-            <form action="{{ route('items.store') }}" method="POST">
+            <form action="{{ route('products.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="title">Title:</label>
@@ -61,7 +63,9 @@ if (empty($_SESSION['ipAddress'])) {
                     <input type="text" name="sku" id="sku" class="form-control" value="{{ $item->sku }}" disabled>
                 </div>
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
-                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
+                <input type="hidden" name="session_id" value="{{ $_SESSION['sessionID'] }}">
+                <input type="hidden" name="ip_address" value="{{ $_SESSION['ipAddress'] }}">
+                <input type="hidden" name="quantity" value="{{ $item->quantity }}">
                 <button type="submit" class="btn btn-lg btn-block btn-primary">Buy?</button>
             </form>
         </div>

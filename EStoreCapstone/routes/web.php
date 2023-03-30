@@ -61,4 +61,6 @@ Route::get('/products/order', '\App\Http\Controllers\ProductController@order')->
 
 Route::get('products/{id}/order', [\App\Http\Controllers\ProductController::class, 'order'])->name('products.order');
 
+Route::get('/cart/{id}/index', '\App\Http\Controllers\CartController@index')->name('cart.index');
+
 

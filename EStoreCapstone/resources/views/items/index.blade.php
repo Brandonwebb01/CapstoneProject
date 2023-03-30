@@ -10,34 +10,31 @@ Laravel Project
 
 @section('content')
 	<div class="row">
-	<div class="col-md-3">
-		<table class="table">
-			<thead>
-				<th>Categories</th>
-			</thead>
-			<tbody>
-				@foreach ($categories as $category)
-					<tr>
-						<td><a href="#">{{ $category->name }}</a></td>
-					</tr>
-				@endforeach
-			</tbody>
-		</table>
-	</div>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<h1>All Items</h1>
+		<div class="col-md-3">
+			<h2>Categories</h2>
+			<table class="table">
+				<thead>
+					<th>Category</th>
+				</thead>
+				<tbody>
+					@foreach ($categories as $category)
+						<tr>
+							<td><a href="#">{{ $category->name }}</a></td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
 		</div>
-		<div class="col-md-2">
-			<a href="{{ route('items.create') }}" class="btn btn-lg btn-block btn-primary btn-h1-spacing">Create New Item</a>
-		</div>
-		<div class="col-md-12">
-			<hr />
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-9">
+			<div class="row">
+				<div class="col-md-8">
+					<h1>All Items</h1>
+				</div>
+				<div class="col-md-4 text-right">
+					<a href="{{ route('items.create') }}" class="btn btn-primary">Create New Item</a>
+				</div>
+			</div>
+			<hr>
 			<table class="table">
 				<thead>
 					<th>#</th>
@@ -51,12 +48,15 @@ Laravel Project
 						<tr>
 							<th>{{ $item->id }}</th>
 							<td>{{ $item->title }}</td>
-							<td style="width: 100px;">{{ date('M j, Y', strtotime($item->created_at)) }}</td>
-							<td>{{ date('M j, Y', strtotime($item->updated_at)) }}</td>
-							<td style="width: 175px;"><div style='float:left; margin-right:5px;'><a href="{{ route('items.edit', $item->id) }}" class="btn btn-success btn-sm">Edit</a></div><div style='float:left;'>
-								{!! Form::open(['route' => ['items.destroy', $item->id], 'method'=>'DELETE']) !!}
-							    	{{ Form::submit('Delete', ['class'=>'btn btn-sm btn-danger btn-block', 'style'=>'', 'onclick'=>'return confirm("Are you sure?")']) }}
-								{!! Form::close() !!}</div>
+							<td>{{ $item->created_at->format('M j, Y') }}</td>
+							<td>{{ $item->updated_at->format('M j, Y') }}</td>
+							<td>
+								<div class="btn-group">
+									<a href="{{ route('items.edit', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
+									{!! Form::open(['route' => ['items.destroy', $item->id], 'method' => 'DELETE', 'onsubmit' => 'return confirm("Are you sure?")']) !!}
+										{{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) }}
+									{!! Form::close() !!}
+								</div>
 							</td>
 						</tr>
 					@endforeach

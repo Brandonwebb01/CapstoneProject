@@ -13,6 +13,12 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $items = Item::orderBy('title','ASC')->paginate(10);
-        return view('productpage.index', ['categories' => $categories, 'items' => $items]);
+        return view('products.index', ['categories' => $categories, 'items' => $items]);
+    }
+
+    public function order($id)
+    {
+        $item = Item::find($id);
+        return view('products.order', ['item' => $item]);
     }
 }

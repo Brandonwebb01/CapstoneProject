@@ -42,6 +42,12 @@ Route::middleware(['auth'])->group(function () {
     } else {
         echo "Class $ProductController does not exist";
     }
+    $CartController = '\App\Http\Controllers\CartController';
+    if (class_exists($CartController)) {
+        Route::resource('cart', $CartController);
+    } else {
+        echo "Class $CartController does not exist";
+    }
     });
     
 
@@ -51,8 +57,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/items/order', '\App\Http\Controllers\ItemController@order')->name('items.order');
+Route::get('/products/order', '\App\Http\Controllers\ProductController@order')->name('products.order');
 
-Route::get('items/{id}/order', [\App\Http\Controllers\ItemController::class, 'order'])->name('items.order');
+Route::get('products/{id}/order', [\App\Http\Controllers\ProductController::class, 'order'])->name('products.order');
 
 

@@ -63,6 +63,7 @@ $quantity = 1;
                     <input type="text" name="sku" id="sku" class="form-control" value="{{ $item->sku }}" disabled>
                 </div>
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
+
                 <input type="hidden" name="session_id" value="{{ $_SESSION['sessionID'] }}">
                 <input type="hidden" name="ip_address" value="{{ $_SESSION['ipAddress'] }}">
                 <input type="hidden" name="quantity" value="{{ $item->quantity }}">

@@ -20,4 +20,9 @@ class ShoppingCart extends Model
     public function items() {
         return $this->hasMany('\App\Item','id', 'category_id')->orderBy('name','ASC');
     }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

@@ -33,10 +33,17 @@ Laravel Project
                 <th>Price</th>
             </thead>
             <tbody>
+                @foreach ($shoppingCart as $shoppingCart)
+						<tr>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>{{ $item->price }}</td>
+						</tr>
+                @endforeach
             </tbody>
         </table>
         <div class="text-center">
-            {{-- {!! $items->links() !!} --}}
+            {{-- {!! $shoppingCart->links() !!} --}}
         </div>
     </div>
 </div>

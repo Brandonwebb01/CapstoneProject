@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function order($id)
     {
         $item = Item::find($id);
-        return view('products.order', ['item' => $item]);
+        return view('products.order', compact('item'));
     }
 
     public function store(Request $request)
@@ -41,11 +41,6 @@ class ProductController extends Controller
         $shoppingCart->save();
 
         // Redirect to the cart page
-        return redirect()->route('cart.index');
-    }
-
-    public function show($id) {
-        $item = Item::find($id);
-        return view('products.show')->with('item', $item);
+        return redirect()->route('cart.index', ['id' => $shoppingCart->id]);
     }
 }

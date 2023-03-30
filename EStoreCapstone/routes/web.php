@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::resource('cart', '\App\Http\Controllers\CartController');
 Route::resource('items', '\App\Http\Controllers\ItemController');
 Route::resource('categories', '\App\Http\Controllers\CategoryController');
 Route::resource('products', '\App\Http\Controllers\ProductController');

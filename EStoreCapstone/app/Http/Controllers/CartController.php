@@ -8,12 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        // Use the $id parameter here to fetch the corresponding shopping cart
-        $cart = ShoppingCart::find($id);
-
         // Pass the cart data to the view
-        return view('cart.index', ['cart' => $cart]);
+        return view('cart.index');
     }
 }

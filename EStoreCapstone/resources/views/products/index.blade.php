@@ -51,21 +51,20 @@ Laravel Project
             </thead>
             <tbody>
                 @foreach ($items as $item)
-                <tr>
-                    <th>{{ $item->id }}</th>
-                    <td>
-                        @if ($item->picture != "")
-                        <p style='margin-top:20px'><br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:100px;' ></p>
-                        @endif
-                    </td>
-                    <td><a href="{{ route('products.order', $item->id) }}">{{ $item->title }}</a></td>
-                    <td>{{ $item->price }}</td>
-                    <td>
-                        <a href="{{ route('products.order', $item->id) }}" class="btn btn-success btn-xs">BuyNow</a>
-                        <br>
-                        <a href="{{ route('cart.index', $item->id) }}" class="btn btn-primary btn-xs">Add to Cart</a>
-                    </td>
-                </tr>
+						<tr>
+							<th>{{ $item->id }}</th>
+							<td><a href="{{ route('products.order', $item->id) }}"><img
+                                @if ($item->picture != "")
+                                <p style='margin-top:20px'><br><img src="{{ Storage::url('images/items/'.$item->picture) }}" style='height:100px;' ></p>
+                                @endif
+							<td><a href="{{ route('products.order', $item->id) }}">{{ $item->title }}</a></td>
+							<td>{{ $item->price }}</td>
+
+							<td><a href="{{ route('products.order', $item->id) }}" class="btn btn-success btn-xs">BuyNow</a>
+								<br>
+								<a href="{{ route('cart.index', $item->id) }}" class="btn btn-primary btn-xs">Add to Cart</a>
+							</td>
+						</tr>
                 @endforeach
             </tbody>
         </table>

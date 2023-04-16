@@ -12,6 +12,7 @@ if (empty($_SESSION['ipAddress'])) {
     $ip_address = $_SERVER['REMOTE_ADDR'];
     $_SESSION['ipAddress'] = $ip_address;
 }
+$quantity = 1;
 ?>
 @extends('common')
 
@@ -33,17 +34,16 @@ Laravel Project
                 <th>Price</th>
             </thead>
             <tbody>
-                @foreach ($shoppingCart as $shoppingCart)
-						<tr>
+                @if(!empty($shoppingCart))
+                        <tr>
                             <td>{{ $item->title }}</td>
-                            <td>{{ $item->quantity }}</td>
+                            <td>{{ $quantity }}</td>
                             <td>{{ $item->price }}</td>
-						</tr>
-                @endforeach
+                        </tr>
+                @endif
             </tbody>
         </table>
         <div class="text-center">
-            {{-- {!! $shoppingCart->links() !!} --}}
         </div>
     </div>
 </div>

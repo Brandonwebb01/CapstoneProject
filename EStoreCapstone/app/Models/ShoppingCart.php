@@ -13,16 +13,11 @@ class ShoppingCart extends Model
     const UPDATED_AT = 'updated_at';
     protected $dates = ['deleted_at'];
 
-    public function category() {
-        return $this->hasOne('\App\Category','id', 'category_id')->orderBy('name','ASC');
-    }
-
     public function items() {
-        return $this->hasMany('\App\Item','id', 'category_id')->orderBy('name','ASC');
+        return $this->hasMany(Item::class, 'item_id')->orderBy('title', 'ASC');
     }
 
-    public function item()
-    {
+    public function item() {
         return $this->belongsTo(Item::class);
     }
 }

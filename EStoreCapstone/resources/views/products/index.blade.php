@@ -62,7 +62,7 @@ Laravel Project
 
 							<td><a href="{{ route('products.order', $item->id) }}" class="btn btn-success btn-xs">BuyNow</a>
 								<br>
-								<a href="{{ route('cart.index', $item->id) }}" class="btn btn-primary btn-xs">Add to Cart</a>
+								<a href="{{ route('products.order', $item->id) }}" class="btn btn-primary btn-xs">Add to Cart</a>
 							</td>
 						</tr>
                 @endforeach
